@@ -42,15 +42,15 @@ jobs:
         env:
           DOCKER_CLI_ACI: 1 
 
-  Deploy:
-  needs: build-analize-scan
-  runs-on: [git-hub-netflix]
-  steps:
-    - name: pull the image
-      run: docker pull nehamalii/netflix:latest
-    - name: Trivy image
-      run: trivy image nehamalii/netflix:latest
-    - name: Run tha conatiner
-      run: docker run -d --name netflix -p 8081:80 nehamalii/netflix:latest
+  deploy:
+    needs: build-analize-scan
+    runs-on: [git-hub-netflix]
+    steps:
+      - name: pull the image
+        run: docker pull nehamalii/netflix:latest
+      - name: Trivy image
+        run: trivy image nehamalii/netflix:latest
+      - name: Run tha conatiner
+        run: docker run -d --name netflix -p 8081:80 nehamalii/netflix:latest
       
 
